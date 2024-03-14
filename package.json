@@ -1,0 +1,21 @@
+{
+  "name": "lineup",
+  "version": "1.0.0",
+  "description": "LineUp Backend source code.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "twitter-bot",
+    "instagram-bot",
+    "social-media",
+    "llama"
+  ],
+  "author": "Sanket Kumbhare",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

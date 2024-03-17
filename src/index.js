@@ -14,4 +14,6 @@ connectDB()
       console.log(`Server is running at PORT : ${port}`);
     });
   })
-  .catch((error) => console.log("APP failed !!!", error));
+  .catch((error) => {
+    console.log("APP failed !!!", error);
+  });

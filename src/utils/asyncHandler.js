@@ -8,4 +8,4 @@ const asyncHandler = (requestHandler) => async (req, res, next) => {
   }
 };
 
-module.exports = asyncHandler;
+module.exports = { asyncHandler };

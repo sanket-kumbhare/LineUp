@@ -40,7 +40,11 @@ const LoginPage = () => {
             variant="outlined"
           >
             <div>
-              <Logo level={"h1"} styles={{ mb: "1rem", fontSize: "4rem" }} />
+              <Logo
+                level={"h1"}
+                styles={{ mb: "1rem", fontSize: "4rem" }}
+                variant="white"
+              />
               <Typography level="h4" sx={{ color: "white" }}>
                 Schedule tweets | AI Powered | Maximum impact
               </Typography>

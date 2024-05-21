@@ -14,10 +14,13 @@ import Scheduler from "./pages/twitter/Scheduler";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<MainLayout />}>
-      <Route path="/twitter/scheduler" element={<Scheduler />} />
-      <Route path="/twitter/ai-bot" element={<AIBot />} />
-    </Route>
+    <>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<MainLayout />}>
+        <Route path="/twitter/scheduler" element={<Scheduler />} />
+        <Route path="/twitter/ai-bot" element={<AIBot />} />
+      </Route>
+    </>
   )
 );
 

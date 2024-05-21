@@ -19,7 +19,7 @@ app.use(cookieParser());
 //
 
 // routes
-const userRouter = require("./routes/user.router");
+const userRouter = require("./routes/user.routes");
 
 app.use("/api/v1/users", userRouter);
 //

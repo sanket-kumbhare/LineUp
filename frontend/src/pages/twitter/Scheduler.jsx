@@ -1,6 +1,7 @@
 import { Delete as DeleteIcon, Edit as EditIcon } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Chip,
   DialogTitle,
   IconButton,
@@ -15,9 +16,35 @@ import { TweetForm } from "../../components";
 
 const Scheduler = () => {
   const [open, setOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const handleOpen = (content) => {
+    setModalContent(content);
+    setOpen(true);
+  };
 
   return (
     <>
+      <Box
+        sx={{
+          display: "flex",
+          mb: 1,
+          gap: 1,
+          flexDirection: { xs: "column", sm: "row" },
+          alignItems: { xs: "start", sm: "center" },
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography level="h2" component="h1">
+          Scheduler
+        </Typography>
+        <Button
+          onClick={() => handleOpen({ heading: "New Tweet", btnText: "Tweet" })}
+        >
+          New Tweet
+        </Button>
+      </Box>
       <Table stickyHeader>
         <thead>
           <tr>
@@ -66,7 +93,12 @@ const Scheduler = () => {
             </td>
             <td>
               <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-                <IconButton color="warning" onClick={() => setOpen(true)}>
+                <IconButton
+                  color="warning"
+                  onClick={() =>
+                    handleOpen({ heading: "Edit Tweet", btnText: "Edit" })
+                  }
+                >
                   <EditIcon />
                 </IconButton>
                 <IconButton color="danger">
@@ -90,14 +122,14 @@ const Scheduler = () => {
           <DialogTitle>
             <div>
               <Typography level="h4" component="h1">
-                <b>Edit Tweet</b>
+                <b>{modalContent.heading}</b>
               </Typography>
               <Typography level="body-sm" sx={{ fontWeight: "normal" }}>
                 {/* Fill in the information to create account. */}
               </Typography>
             </div>
           </DialogTitle>
-          <TweetForm />
+          <TweetForm btnText={modalContent.btnText} />
         </ModalDialog>
       </Modal>
     </>

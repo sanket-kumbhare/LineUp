@@ -3,7 +3,7 @@ import React from "react";
 import TextareaField from "./TextareaField";
 import InputField from "./InputField";
 
-const TweetForm = () => {
+const TweetForm = ({ btnText, ...props }) => {
   return (
     <form
       onSubmit={(event) => {
@@ -20,7 +20,7 @@ const TweetForm = () => {
         <InputField label={"Datetime"} type="datetime-local" />
         <Box sx={{ display: "flex", justifyContent: "space-around", gap: 2 }}>
           <Button type={"submit"} fullWidth>
-            Edit
+            {btnText}
           </Button>
           <Button type="button" color="neutral" fullWidth>
             Cancel

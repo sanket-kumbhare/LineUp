@@ -6,7 +6,7 @@ const { User } = require("../models/user.model");
 const verifyJWT = asyncHandler(async (req, _, next) => {
   try {
     const accessToken =
-      req.cookie?.accessToken ||
+      req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
     if (!accessToken) {
       throw new ApiError(401, "access token not found");

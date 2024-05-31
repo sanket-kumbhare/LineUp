@@ -5,5 +5,4 @@ const cookieOptions = {
 
 module.exports = {
   cookieOptions,
-  DB_NAME: "LineUp",
 };

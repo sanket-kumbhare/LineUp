@@ -7,11 +7,11 @@ const postSchema = new mongoose.Schema(
       type: Object,
       required: true,
     },
-    datetime: {
+    dateTime: {
       type: Date,
       required: true,
     },
-    socialmedia: {
+    socialMedia: {
       type: String,
       required: true,
     },

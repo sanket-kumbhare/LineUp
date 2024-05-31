@@ -5,7 +5,7 @@ const asyncHandler = require("./../utils/asyncHandler");
 const ApiError = require("./../utils/ApiError");
 const ApiResponse = require("./../utils/ApiResponse");
 const { User } = require("./../models/user.model");
-const { cookieOPtions } = require("./../constants");
+const { cookieOptions } = require("./../constants");
 
 const generateAccessAndRefreshToken = async (userId) => {
   try {
@@ -44,8 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
       .required(),
   });
 
-  const { value, error } = userSchema.validate(req.body);
-
+  const { _, error } = userSchema.validate(req.body);
   if (error) {
     const { details } = error;
     const message = details.map((i) => i.message).join(",");
@@ -66,7 +65,6 @@ const registerUser = asyncHandler(async (req, res) => {
   let createdUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
-
   if (!createdUser) {
     throw new ApiError(400, "something went wrong while registering user!");
   }
@@ -84,7 +82,7 @@ const loginUser = asyncHandler(async (req, res) => {
     password: Joi.string().required(),
   });
 
-  let { value, error } = userSchema.validate(req.body);
+  let { _, error } = userSchema.validate(req.body);
 
   if (error) {
     const { details } = error;
@@ -112,12 +110,12 @@ const loginUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .cookie("accessToken", accessToken, cookieOPtions)
-    .cookie("refreshToken", refreshToken)
+    .cookie("accessToken", accessToken, cookieOptions)
+    .cookie("refreshToken", refreshToken, cookieOptions)
     .json(
       new ApiResponse(
         200,
-        { user: accessToken, refreshToken, loggedUser },
+        { accessToken, refreshToken, loggedUser },
         "user logged in successfully"
       )
     );
@@ -138,14 +136,14 @@ const logoutUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .clearCookie("accessToken", cookieOPtions)
-    .clearCookie("refreshToken", cookieOPtions)
+    .clearCookie("accessToken", cookieOptions)
+    .clearCookie("refreshToken", cookieOptions)
     .json(new ApiResponse(200, null, "user logged out successfully"));
 });
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
-    req.cookie?.refreshToken ||
+    req.cookies?.refreshToken ||
     req.header("Authorization")?.replace("Bearer ", "") ||
     req.body?.refreshToken;
   if (!incomingRefreshToken) {
@@ -171,8 +169,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .cookie("accessToken", accessToken, cookieOPtions)
-    .cookie("refreshToken", newRefreshToken, cookieOPtions)
+    .cookie("accessToken", accessToken, cookieOptions)
+    .cookie("refreshToken", newRefreshToken, cookieOptions)
     .json(
       new ApiResponse(
         200,

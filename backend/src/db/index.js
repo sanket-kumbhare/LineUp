@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const DB_NAME = process.env.DB_Name || "database";
+const DB_NAME = process.env.DB_Name || "lineup";
 
 const connectDB = async () => {
   try {

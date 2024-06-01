@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const asyncHandler = require("../utils/asyncHandler");
 const ApiError = require("../utils/ApiError");
 const ApiResponse = require("../utils/ApiResponse");
+const { validationErrors } = require("../utils/helpers.js");
 const { Post } = require("../models/post.model");
 const { ObjectId } = mongoose.Types;
 
@@ -14,12 +15,7 @@ const addPost = asyncHandler(async (req, res) => {
   });
 
   let { _, error } = postSchema.validate(req.body);
-
-  if (error) {
-    const { details } = error;
-    const message = details.map((i) => i.message).join(",");
-    throw new ApiError(400, message);
-  }
+  validationErrors(error);
 
   // make conditional after multiple platform implementation
   let socialMedia = "twitter";
@@ -50,10 +46,10 @@ const listPosts = asyncHandler(async (req, res) => {
     socialMedia,
     deleted: false,
   });
-  if (posts?.length) {
+  if (!posts?.length) {
     throw new ApiError(
       404,
-      `something went wrong while searching for ${socialMedia} posts`
+      `${socialMedia} posts Not Found`
     );
   }
 
@@ -76,23 +72,33 @@ const showPostDetails = asyncHandler(async (req, res) => {
 });
 
 const editPost = asyncHandler(async (req, res) => {
-  let postId = req.params?.id;
-  let postFields = req.body;
-  if (!postId) {
-    throw new ApiError(400, "invalid post id");
-  }
-  let post = await Post.updateOne(
-    {
-      _id: new ObjectId(postId),
-      owner: req.user._id,
-      deleted: false,
-    },
-    { $set: postFields }
-  );
+  try {
+    let postSchema = Joi.object({
+      content: Joi.string().max(280),
+      dateTime: Joi.string().isoDate(),
+    });
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, { post }, "post updated successfully"));
+    let { _, error } = postSchema.validate(req.body);
+    validationErrors(error);
+
+    let postId = req.params?.id;
+    let postFields = req.body;
+    if (!postId) {
+      throw new ApiError(400, "invalid post id");
+    }
+    let post = await Post.updateOne(
+      {
+        _id: new ObjectId(postId),
+        owner: req.user._id,
+        deleted: false,
+      },
+      { $set: postFields }
+    );
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, { post }, "post updated successfully"));
+  } catch (error) {}
 });
 
 // soft delete

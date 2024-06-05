@@ -1,14 +1,14 @@
 import { FormControl, FormLabel, Input } from "@mui/joy";
+import { forwardRef } from "react";
 
-const InputField = ({ label, type = "text", ...props }) => {
+const InputField = ({ label, type = "text", ...props }, ref) => {
   return (
     <>
       <FormControl>
         <FormLabel>{label}</FormLabel>
-        <Input type={type} {...props} />
+        <Input ref={ref} type={type} {...props} />
       </FormControl>
     </>
   );
 };
-
-export default InputField;
+export default forwardRef(InputField);

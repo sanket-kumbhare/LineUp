@@ -7,7 +7,7 @@ import {
   Sheet,
   Typography,
 } from "@mui/joy";
-import React, { useState } from "react";
+import { useState } from "react";
 import { LoginForm, Logo, RegisterForm } from "../../components";
 
 const LoginPage = () => {

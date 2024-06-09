@@ -4,12 +4,21 @@ import InputField from "./InputField";
 import { useState } from "react";
 import { Error as ErrorIcon } from "@mui/icons-material";
 import Toast from "./Toast";
+import auth from "../api/auth";
 
 const LoginForm = ({ setOpen }) => {
   const { register, handleSubmit } = useForm();
   const [toast, setToast] = useState(false);
   const login = async (data) => {
-    setToast(true);
+    console.log(data);
+    try {
+      const userAccount = await auth.loginAccount(data);
+      if (userAccount) {
+        console.log(userAccount);
+      }
+    } catch (error) {
+      console.error(error);
+    }
     console.log(data);
   };
   return (
@@ -18,16 +27,11 @@ const LoginForm = ({ setOpen }) => {
         <Stack spacing={2}>
           <InputField
             type={"text"}
-            label={"Email"}
-            placeholder={"john.deo@email.com"}
+            label={"Username"}
+            placeholder={"john.deo"}
             autoFocus={true}
-            {...register("email", {
+            {...register("userName", {
               required: true,
-              validate: {
-                matchPatern: (value) =>
-                  /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                  "Invalid Email Id",
-              },
             })}
           />
           <InputField

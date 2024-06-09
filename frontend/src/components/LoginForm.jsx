@@ -10,7 +10,6 @@ const LoginForm = ({ setOpen }) => {
   const { register, handleSubmit } = useForm();
   const [toast, setToast] = useState(false);
   const login = async (data) => {
-    console.log(data);
     try {
       const userAccount = await auth.loginAccount(data);
       if (userAccount) {
@@ -19,14 +18,12 @@ const LoginForm = ({ setOpen }) => {
     } catch (error) {
       console.error(error);
     }
-    console.log(data);
   };
   return (
     <>
       <form onSubmit={handleSubmit(login)}>
         <Stack spacing={2}>
           <InputField
-            type={"text"}
             label={"Username"}
             placeholder={"john.deo"}
             autoFocus={true}

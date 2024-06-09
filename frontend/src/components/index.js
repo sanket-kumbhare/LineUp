@@ -6,6 +6,7 @@ import Logo from "./Logo";
 import Header from "./Header";
 import TweetForm from "./TweetForm";
 import TextareaField from "./TextareaField";
+import Toast from "./Toast";
 
 export {
   InputField,
@@ -16,4 +17,5 @@ export {
   Header,
   TweetForm,
   TextareaField,
+  Toast,
 };

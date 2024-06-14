@@ -5,15 +5,21 @@ import { useState } from "react";
 import { Error as ErrorIcon } from "@mui/icons-material";
 import Toast from "./Toast";
 import auth from "../api/auth";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authLogin } from "../features/auth/authSlice";
 
 const LoginForm = ({ setOpen }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [toast, setToast] = useState(false);
   const login = async (data) => {
     try {
-      const userAccount = await auth.loginAccount(data);
-      if (userAccount) {
-        console.log(userAccount);
+      const userData = await auth.loginAccount(data);
+      if (userData) {
+        dispatch(authLogin(userData));
+        navigate("/");
       }
     } catch (error) {
       console.error(error);

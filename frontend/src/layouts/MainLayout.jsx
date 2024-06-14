@@ -20,7 +20,7 @@ const breadcrumbsMap = {
 
 const MainLayout = () => {
   const location = useLocation();
-  const pathnames = location.pathname.split("/").filter((x) => x);
+  const pathNames = location.pathname.split("/").filter((x) => x);
 
   return (
     <CssVarsProvider disableTransitionOnChange>
@@ -47,7 +47,7 @@ const MainLayout = () => {
             gap: 1,
           }}
         >
-          {pathnames.length > 0 && (
+          {pathNames.length > 0 && (
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Breadcrumbs
                 size="sm"
@@ -55,31 +55,29 @@ const MainLayout = () => {
                 separator={<ChevronRightRoundedIcon fontSize="sm" />}
                 sx={{ pl: 0 }}
               >
-                {pathnames.map((value, index) => {
-                  const last = index === pathnames.length - 1;
-                  const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+                {pathNames.map((value, index) => {
+                  const last = index === pathNames.length - 1;
+                  const to = `/${pathNames.slice(0, index + 1).join("/")}`;
 
                   return last ? (
                     <Typography
                       color="primary"
                       fontWeight={500}
                       fontSize={12}
-                      key={value}
+                      key={`breadcrumb-${index}`}
                     >
                       {breadcrumbsMap[value]}
                     </Typography>
                   ) : (
-                    <>
-                      <Link
-                        underline="none"
-                        color="neutral"
-                        href="#some-link"
-                        aria-label="Home"
-                        key={value}
-                      >
-                        {breadcrumbsMap[value]}
-                      </Link>
-                    </>
+                    <Link
+                      underline="none"
+                      color="neutral"
+                      href="#some-link"
+                      aria-label="Home"
+                      key={`breadcrumb-${index}`}
+                    >
+                      {breadcrumbsMap[value]}
+                    </Link>
                   );
                 })}
               </Breadcrumbs>

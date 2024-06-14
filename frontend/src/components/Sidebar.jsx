@@ -19,6 +19,8 @@ import {
 } from "@mui/icons-material";
 import Logo from "./Logo";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import auth from "../api/auth";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
 // import { closeSidebar } from "../utils";
@@ -45,6 +47,10 @@ function Toggler({ defaultExpanded = false, renderToggle, children }) {
 }
 
 export default function Sidebar() {
+  const authUser = useSelector((state) => state.auth.authUser);
+  const logout = () => {
+    console.log("user logged out");
+  };
   const navItems = [
     {
       name: "Calendar",
@@ -230,10 +236,21 @@ export default function Sidebar() {
           src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
         />
         <Box sx={{ minWidth: 0, flex: 1 }}>
-          <Typography level="title-sm">Sanket K.</Typography>
-          <Typography level="body-xs">@sanket.kumbhare</Typography>
+          <Typography level="title-sm">
+            {authUser.loggedUser.fullName.length <= 16
+              ? authUser.loggedUser.fullName
+              : authUser.loggedUser.fullName.slice(0, 12) + "..."}
+          </Typography>
+          <Typography level="body-xs">
+            @{authUser.loggedUser.userName}
+          </Typography>
         </Box>
-        <IconButton size="sm" variant="plain" color="neutral">
+        <IconButton
+          onClick={() => logout()}
+          size="sm"
+          variant="plain"
+          color="neutral"
+        >
           <LogoutRoundedIcon />
         </IconButton>
       </Box>

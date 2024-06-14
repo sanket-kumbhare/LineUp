@@ -11,8 +11,6 @@ class Auth {
   async loginAccount(data) {
     try {
       const response = await this.axios.post("/users/login", data);
-      console.log(response);
-      // redux code
       return response.data;
     } catch (error) {
       throw error;
@@ -22,8 +20,6 @@ class Auth {
   async registerAccount(data) {
     try {
       const response = await this.axios.post("/users/register", data);
-      console.log(response);
-      //redux code
       return response.data;
     } catch (error) {
       throw error;

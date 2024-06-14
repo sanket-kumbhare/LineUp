@@ -32,17 +32,18 @@ const generateAccessAndRefreshToken = async (userId) => {
 const registerUser = asyncHandler(async (req, res) => {
   const userSchema = Joi.object({
     fullName: Joi.string().required(),
-    userName: Joi.string().alphanum().min(3).max(12).required(),
+    userName: Joi.string()
+      .pattern(/^[a-zA-Z0-9._]+$/)
+      .min(3)
+      .max(24)
+      .required(),
     email: Joi.string().email({ minDomainSegments: 2 }).required(),
     // - at least 8 characters
     // - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
     // - Can contain special characters
     password: Joi.string()
-      .pattern(
-        new RegExp(
-          "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
-        )
-      )
+      .pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
+      .min(8)
       .required(),
   });
 

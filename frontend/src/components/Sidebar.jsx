@@ -18,9 +18,10 @@ import {
   CalendarMonth,
 } from "@mui/icons-material";
 import Logo from "./Logo";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import auth from "../api/auth";
+import { authLogout } from "../features/auth/authSlice";
 
 // import ColorSchemeToggle from "./ColorSchemeToggle";
 // import { closeSidebar } from "../utils";
@@ -48,7 +49,14 @@ function Toggler({ defaultExpanded = false, renderToggle, children }) {
 
 export default function Sidebar() {
   const authUser = useSelector((state) => state.auth.authUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const logout = () => {
+    let response = auth.logoutAccount();
+    if (response) {
+      dispatch(authLogout());
+      navigate("/login");
+    }
     console.log("user logged out");
   };
   const navItems = [
@@ -237,13 +245,11 @@ export default function Sidebar() {
         />
         <Box sx={{ minWidth: 0, flex: 1 }}>
           <Typography level="title-sm">
-            {authUser.loggedUser.fullName.length <= 16
-              ? authUser.loggedUser.fullName
-              : authUser.loggedUser.fullName.slice(0, 12) + "..."}
+            {authUser.fullName.length <= 16
+              ? authUser.fullName
+              : authUser.fullName.slice(0, 12) + "..."}
           </Typography>
-          <Typography level="body-xs">
-            @{authUser.loggedUser.userName}
-          </Typography>
+          <Typography level="body-xs">@{authUser.userName}</Typography>
         </Box>
         <IconButton
           onClick={() => logout()}

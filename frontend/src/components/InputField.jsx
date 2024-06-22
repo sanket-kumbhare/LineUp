@@ -6,7 +6,7 @@ const InputField = ({ label, type = "text", ...props }, ref) => {
     <>
       <FormControl>
         <FormLabel>{label}</FormLabel>
-        <Input ref={ref} type={type} {...props} />
+        <Input ref={ref} type={type} {...props} autoComplete="off" />
       </FormControl>
     </>
   );

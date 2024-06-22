@@ -25,6 +25,15 @@ class Auth {
       throw error;
     }
   }
+
+  async logoutAccount(){
+    try {
+      const response = await this.axios.post("/users/logout");
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 const auth = new Auth();

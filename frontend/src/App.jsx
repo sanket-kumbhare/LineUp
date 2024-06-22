@@ -11,12 +11,20 @@ import LoginPage from "./pages/login-page/LoginPage";
 import MainLayout from "./layouts/MainLayout";
 import AIBot from "./pages/twitter/AIBot";
 import Scheduler from "./pages/twitter/Scheduler";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/" element={<MainLayout />}>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route path="/twitter/scheduler" element={<Scheduler />} />
         <Route path="/twitter/ai-bot" element={<AIBot />} />
       </Route>

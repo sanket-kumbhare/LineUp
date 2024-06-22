@@ -8,11 +8,22 @@ import {
   Snackbar,
   Typography,
 } from "@mui/joy";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoginForm, Logo, RegisterForm } from "../../components";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [open, setOpen] = useState(false);
+  const isAuthenticated = useSelector((state) => state.auth.authStatus);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
+
   return (
     <>
       <Grid container sx={{ height: "100vh" }}>

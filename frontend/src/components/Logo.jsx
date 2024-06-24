@@ -1,5 +1,4 @@
 import { Typography } from "@mui/joy";
-import React from "react";
 
 const Logo = ({ level, styles, variant = "primary" }) => {
   const color = variant === "primary" ? "#814DDE" : "white";

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import Avatar from "@mui/joy/Avatar";
 import Box from "@mui/joy/Box";
@@ -17,7 +17,7 @@ import {
   Instagram as InstaIcon,
   CalendarMonth,
 } from "@mui/icons-material";
-import Logo from "./Logo";
+import { Logo } from "../components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import auth from "../api/auth";
@@ -27,7 +27,7 @@ import { authLogout } from "../features/auth/authSlice";
 // import { closeSidebar } from "../utils";
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
-  const [open, setOpen] = React.useState(defaultExpanded);
+  const [open, setOpen] = useState(defaultExpanded);
   return (
     <>
       {renderToggle({ open, setOpen })}

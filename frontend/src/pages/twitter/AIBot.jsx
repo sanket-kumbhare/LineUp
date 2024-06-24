@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/joy";
-import React from "react";
 
 const AIBot = () => {
   return (

@@ -1,7 +1,5 @@
 import { Box, Button, Stack } from "@mui/joy";
-import React from "react";
-import TextareaField from "./TextareaField";
-import InputField from "./InputField";
+import { TextareaField, InputField } from "../components";
 
 const TweetForm = ({ btnText, ...props }) => {
   return (

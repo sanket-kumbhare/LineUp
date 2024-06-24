@@ -1,6 +1,3 @@
-//
-
-import * as React from "react";
 import { CssVarsProvider } from "@mui/joy/styles";
 import { Typography, CssBaseline, Box, Breadcrumbs, Link } from "@mui/joy";
 import {

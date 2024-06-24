@@ -1,7 +1,6 @@
 import { Button, Stack } from "@mui/joy";
-import InputField from "./InputField";
 import { useForm } from "react-hook-form";
-import Toast from "./Toast";
+import { Toast, InputField } from "../components";
 import { CheckCircle as CheckCircleIcon } from "@mui/icons-material";
 import { useState } from "react";
 import auth from "../api/auth";

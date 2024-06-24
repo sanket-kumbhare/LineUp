@@ -7,6 +7,8 @@ import Header from "./Header";
 import TweetForm from "./TweetForm";
 import TextareaField from "./TextareaField";
 import Toast from "./Toast";
+import ProtectedRoute from "./ProtectedRoute";
+import ModalTemplate from "./ModalTemplate";
 
 export {
   InputField,
@@ -18,4 +20,6 @@ export {
   TweetForm,
   TextareaField,
   Toast,
+  ProtectedRoute,
+  ModalTemplate,
 };

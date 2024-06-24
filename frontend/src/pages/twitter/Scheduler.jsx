@@ -11,7 +11,7 @@ import {
   Table,
   Typography,
 } from "@mui/joy";
-import React, { useState } from "react";
+import { useState } from "react";
 import { TweetForm } from "../../components";
 
 const Scheduler = () => {

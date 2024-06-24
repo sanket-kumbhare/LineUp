@@ -1,5 +1,4 @@
 import { FormControl, FormLabel, Textarea } from "@mui/joy";
-import React from "react";
 
 const TextareaField = ({ label, rows, ...props }) => {
   return (

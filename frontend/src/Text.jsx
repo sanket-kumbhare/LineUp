@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { useColorScheme } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
 import CssBaseline from "@mui/joy/CssBaseline";
@@ -11,11 +11,11 @@ import Link from "@mui/joy/Link";
 
 function ModeToggle() {
   const { mode, setMode } = useColorScheme();
-  const [mounted, setMounted] = React.useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // necessary for server-side rendering
   // because mode is undefined on the server
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
   if (!mounted) {

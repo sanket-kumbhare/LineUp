@@ -11,17 +11,15 @@ const { ObjectId } = mongoose.Types;
 const addPost = asyncHandler(async (req, res) => {
   const postSchema = Joi.object({
     content: Joi.string().max(280).required(),
+    socialMedia: Joi.string().required(),
     dateTime: Joi.string().isoDate().required(),
   });
 
   let { _, error } = postSchema.validate(req.body);
   validationErrors(error);
 
-  // make conditional after multiple platform implementation
-  let socialMedia = "twitter";
   let postFields = {
     ...req.body,
-    socialMedia: socialMedia,
     owner: req.user._id,
   };
 
@@ -47,10 +45,7 @@ const listPosts = asyncHandler(async (req, res) => {
     deleted: false,
   });
   if (!posts?.length) {
-    throw new ApiError(
-      404,
-      `${socialMedia} posts Not Found`
-    );
+    throw new ApiError(404, `${socialMedia} posts Not Found`);
   }
 
   return res.status(200).json(new ApiResponse(200, { posts }));

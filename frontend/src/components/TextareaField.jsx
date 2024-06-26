@@ -1,14 +1,15 @@
 import { FormControl, FormLabel, Textarea } from "@mui/joy";
+import { forwardRef } from "react";
 
-const TextareaField = ({ label, rows, ...props }) => {
+const TextareaField = ({ label, rows, ...props }, ref) => {
   return (
     <>
       <FormControl>
         <FormLabel>{label}</FormLabel>
-        <Textarea minRows={rows} {...props} />
+        <Textarea minRows={rows} ref={ref} {...props} />
       </FormControl>
     </>
   );
 };
 
-export default TextareaField;
+export default forwardRef(TextareaField);

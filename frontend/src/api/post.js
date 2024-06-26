@@ -1,15 +1,29 @@
 import axios from "axios";
 import { axiosConfig } from "../config/config";
+import { useSelector } from "react-redux";
 
-class Posts{
+class Posts {
   axios;
+  headers;
   constructor() {
     this.axios = axios.create(axiosConfig);
   }
 
-  async getPosts() {
+  getHeaders(accessToken) {
+    return {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    };
+  }
+
+  async getPosts(accessToken) {
     try {
-      const response = await this.axios.get("/posts/list");
+      const response = await this.axios.get(
+        "/posts/list",
+        this.getHeaders(accessToken)
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -25,9 +39,15 @@ class Posts{
     }
   }
 
-  async addPost(data) {
+  async addPost(accessToken, data) {
+    console.log(data);
     try {
-      const response = await this.axios.post("/posts/add", data);
+      console.log(this.getHeaders(accessToken));
+      const response = await this.axios.post(
+        "/posts/add",
+        data,
+        this.getHeaders(accessToken)
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -53,4 +73,6 @@ class Posts{
   }
 }
 
-export default Posts;
+const post = new Posts();
+
+export default post;

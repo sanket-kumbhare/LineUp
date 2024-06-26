@@ -3,9 +3,22 @@ import Sheet from "@mui/joy/Sheet";
 import IconButton from "@mui/joy/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { toggleSidebar } from "../utils/utils";
+// import { toggleSidebar } from "../utils/utils";
 
 export default function Header() {
+  const toggleSidebar = () => {
+    if (typeof window !== "undefined" && typeof document !== "undefined") {
+      const slideIn = window
+        .getComputedStyle(document.documentElement)
+        .getPropertyValue("--SideNavigation-slideIn");
+      if (slideIn) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    }
+  };
+
   return (
     <Sheet
       sx={{

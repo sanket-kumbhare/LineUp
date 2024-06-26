@@ -11,17 +11,32 @@ import {
   Table,
   Typography,
 } from "@mui/joy";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TweetForm } from "../../components";
+import tweets from "../../api/post";
+import { capitalize } from "lodash";
 
 const Scheduler = () => {
   const [open, setOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
   const [modalContent, setModalContent] = useState("");
 
   const handleOpen = (content) => {
     setModalContent(content);
     setOpen(true);
   };
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await tweets.getPosts();
+        setPosts(response.data.posts);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchPosts();
+  }, [setPosts]);
 
   return (
     <>
@@ -62,51 +77,36 @@ const Scheduler = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td style={{ textAlign: "center" }}>1</td>
-            <td>First Tweet with Scheduler</td>
-            <td style={{ textAlign: "center" }}>29/03/2024 19:00</td>
-            <td style={{ textAlign: "center" }}>
-              <Chip variant="solid" color="warning">
-                Pending
-              </Chip>
-            </td>
-            <td>
-              <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-                <IconButton color="warning">
-                  <EditIcon />
-                </IconButton>
-                <IconButton color="danger">
-                  <DeleteIcon />
-                </IconButton>
-              </Box>
-            </td>
-          </tr>
-          <tr>
-            <td style={{ textAlign: "center" }}>2</td>
-            <td>First Tweet with Scheduler</td>
-            <td style={{ textAlign: "center" }}>29/03/2024 19:00</td>
-            <td style={{ textAlign: "center" }}>
-              <Chip color="success" variant="solid">
-                Completed
-              </Chip>
-            </td>
-            <td>
-              <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-                <IconButton
-                  color="warning"
-                  onClick={() =>
-                    handleOpen({ heading: "Edit Tweet", btnText: "Edit" })
-                  }
+          {posts.map((post) => (
+            <tr>
+              <td style={{ textAlign: "center" }}>1</td>
+              <td>{post.content}</td>
+              <td style={{ textAlign: "center" }}>{post.dateTime}</td>
+              <td style={{ textAlign: "center" }}>
+                <Chip
+                  variant="solid"
+                  color={post.status == "pending" ? "warning" : "success"}
                 >
-                  <EditIcon />
-                </IconButton>
-                <IconButton color="danger">
-                  <DeleteIcon />
-                </IconButton>
-              </Box>
-            </td>
-          </tr>
+                  {capitalize(post.status)}
+                </Chip>
+              </td>
+              <td>
+                <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                  <IconButton
+                    color="warning"
+                    onClick={() =>
+                      handleOpen({ heading: "Edit Tweet", btnText: "Edit" })
+                    }
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton color="danger">
+                    <DeleteIcon />
+                  </IconButton>
+                </Box>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
       <Modal open={open} onClose={() => setOpen(false)}>

@@ -77,8 +77,8 @@ const Scheduler = () => {
           </tr>
         </thead>
         <tbody>
-          {posts.map((post) => (
-            <tr>
+          {posts.map((post, index) => (
+            <tr key={index || post._id}>
               <td style={{ textAlign: "center" }}>1</td>
               <td>{post.content}</td>
               <td style={{ textAlign: "center" }}>{post.dateTime}</td>
@@ -129,7 +129,11 @@ const Scheduler = () => {
               </Typography>
             </div>
           </DialogTitle>
-          <TweetForm btnText={modalContent.btnText} />
+          <TweetForm
+            btnText={modalContent.btnText}
+            setOpen={setOpen}
+            setPosts={setPosts}
+          />
         </ModalDialog>
       </Modal>
     </>

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import postTweet from "../api/post";
 import { useSelector } from "react-redux";
 
-const TweetForm = ({ btnText, ...props }) => {
+const TweetForm = ({ btnText, setOpen, setPosts, ...props }) => {
   const { register, handleSubmit } = useForm();
   const accessToken = useSelector((state) => state.auth.accessToken);
 
@@ -12,7 +12,11 @@ const TweetForm = ({ btnText, ...props }) => {
     try {
       data.socialMedia = "twitter";
       const response = await postTweet.addPost(accessToken, data);
-      console.log(response);
+      if (response.success) {
+        console.log(response);
+        setOpen(false);
+        setPosts((prevPosts) => [response.data, ...prevPosts]);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -39,7 +43,12 @@ const TweetForm = ({ btnText, ...props }) => {
           <Button type="submit" fullWidth>
             {btnText}
           </Button>
-          <Button type="button" color="neutral" fullWidth>
+          <Button
+            type="button"
+            color="neutral"
+            onClick={() => setOpen(false)}
+            fullWidth
+          >
             Cancel
           </Button>
         </Box>

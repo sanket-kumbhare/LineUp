@@ -57,7 +57,6 @@ export default function Sidebar() {
       dispatch(authLogout());
       navigate("/login");
     }
-    console.log("user logged out");
   };
   const navItems = [
     {

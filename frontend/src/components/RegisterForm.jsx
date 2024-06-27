@@ -10,9 +10,9 @@ const RegisterForm = () => {
   const [toast, setToast] = useState(false);
   const signup = async (data) => {
     try {
-      console.log(data);
       const userAccount = await auth.registerAccount(data);
       if (userAccount) {
+        // TODO: show toast or login user
         console.log(userAccount);
       }
     } catch (error) {

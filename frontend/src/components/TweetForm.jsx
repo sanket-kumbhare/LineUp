@@ -13,7 +13,6 @@ const TweetForm = ({ btnText, setOpen, setPosts, ...props }) => {
       data.socialMedia = "twitter";
       const response = await postTweet.addPost(accessToken, data);
       if (response.success) {
-        console.log(response);
         setOpen(false);
         setPosts((prevPosts) => [response.data, ...prevPosts]);
       }

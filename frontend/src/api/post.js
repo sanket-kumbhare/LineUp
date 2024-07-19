@@ -40,9 +40,7 @@ class Posts {
   }
 
   async addPost(accessToken, data) {
-    console.log(data);
     try {
-      console.log(this.getHeaders(accessToken));
       const response = await this.axios.post(
         "/posts/add",
         data,
@@ -65,7 +63,7 @@ class Posts {
 
   async deletePost(id, data) {
     try {
-      const response = await this.axios.post(`/posts/delete/${id}`, data);
+      const response = await this.axios.delete(`/posts/delete/${id}`);
       return response.data;
     } catch (error) {
       throw error;

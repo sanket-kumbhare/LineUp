@@ -43,10 +43,7 @@ const listPosts = asyncHandler(async (req, res) => {
     owner: req.user._id,
     socialMedia,
     deleted: false,
-  });
-  if (!posts?.length) {
-    throw new ApiError(404, `${socialMedia} posts Not Found`);
-  }
+  }).sort({ createdAt: -1 });
 
   return res.status(200).json(new ApiResponse(200, { posts }));
 });

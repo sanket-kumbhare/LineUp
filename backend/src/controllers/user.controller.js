@@ -48,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   const { _, error } = userSchema.validate(req.body);
-  await validationErrors(error);
+  validationErrors(error);
 
   let userName = await User.findOne({ userName: req.body.userName });
   if (userName) {

@@ -28,6 +28,7 @@
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.1",
-    "mongoose-aggregate-paginate-v2": "^1.0.7"
+    "mongoose-aggregate-paginate-v2": "^1.0.7",
+    "twitter-api-sdk": "^1.2.1"
   }
 }

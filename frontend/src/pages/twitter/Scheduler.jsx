@@ -66,7 +66,9 @@ const Scheduler = () => {
           Scheduler
         </Typography>
         <Button
-          onClick={() => handleOpen({ heading: "New Tweet", btnText: "Tweet" })}
+          onClick={() =>
+            handleOpen({ heading: "New Tweet", btnText: "Schedule" })
+          }
         >
           New Tweet
         </Button>

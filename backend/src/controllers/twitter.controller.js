@@ -1,6 +1,12 @@
+const { Client, auth } = require("twitter-api-sdk");
+const mongoose = require("mongoose");
+
+const { ObjectId } = mongoose.Types;
+const {
+  UserSocialMediaToken,
+} = require("../models/userSocialMediaToken.model");
 const ApiError = require("../utils/ApiError");
 const asyncHandler = require("../utils/asyncHandler");
-const { Client, auth } = require("twitter-api-sdk");
 
 const authClient = new auth.OAuth2User({
   client_id: process.env.TWITTER_CLIENT_ID,
@@ -28,10 +34,16 @@ const callback = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Code not found");
   }
 
-  const token = await authClient.requestAccessToken(code);
+  const accessTokenResponse = await authClient.requestAccessToken(code);
 
-  // TODO: store accessToken and refreshToken in database userCredentials
-  console.log({ token });
+  // TODO: userId is hardcoded for now. Need to get it from middleware/session/cookies
+  const creds = await UserSocialMediaToken.create({
+    userId: new ObjectId("669ff5a4d6b8b7caea96c99f"),
+    socialMedia: "twitter",
+    token: accessTokenResponse.token,
+  });
+
+  return res.json({ creds });
 });
 
 const login = asyncHandler(async (req, res) => {

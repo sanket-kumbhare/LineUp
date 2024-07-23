@@ -7,6 +7,9 @@ const ApiResponse = require("./../utils/ApiResponse");
 const { User } = require("./../models/user.model");
 const { cookieOptions } = require("./../constants");
 const { validationErrors } = require("../utils/helpers");
+const {
+  UserSocialMediaToken,
+} = require("../models/userSocialMediaToken.model");
 
 const generateAccessAndRefreshToken = async (userId) => {
   try {
@@ -85,6 +88,7 @@ const loginUser = asyncHandler(async (req, res) => {
   validationErrors(error);
 
   const user = await User.findOne({ userName });
+  // .populate("userCredentials");
   if (!user) {
     throw new ApiError(401, "user does not exist");
   }
@@ -102,6 +106,11 @@ const loginUser = asyncHandler(async (req, res) => {
     "-password -refreshToken"
   );
 
+  const socialMediaTokens = await UserSocialMediaToken.find({
+    userId: user._id,
+  }).select("socialMedia token");
+
+  console.log(socialMediaTokens);
   return res
     .status(200)
     .cookie("accessToken", accessToken, cookieOptions)
@@ -109,7 +118,7 @@ const loginUser = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         200,
-        { accessToken, refreshToken, loggedUser },
+        { accessToken, refreshToken, socialMediaTokens, loggedUser },
         "user logged in successfully"
       )
     );

@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/joy";
 
-const AIBot = () => {
+const AIBotPage = () => {
   return (
     <>
       <Box
@@ -18,9 +18,9 @@ const AIBot = () => {
           AI-Bot
         </Typography>
       </Box>
-      <div>AIBot</div>
+      <div>AIBotPage</div>
     </>
   );
 };
 
-export default AIBot;
+export default AIBotPage;

@@ -12,11 +12,11 @@ import {
   Typography,
 } from "@mui/joy";
 import { useEffect, useState } from "react";
-import { TweetForm } from "../../components";
+import { TweetForm, SocialAuth } from "../../components";
 import tweets from "../../api/post";
 import { capitalize } from "lodash";
 
-const Scheduler = () => {
+const SchedulerPage = () => {
   const [open, setOpen] = useState(false);
   const [posts, setPosts] = useState([]);
   const [modalContent, setModalContent] = useState("");
@@ -49,6 +49,7 @@ const Scheduler = () => {
     fetchPosts();
   }, [setPosts]);
 
+  return <SocialAuth></SocialAuth>;
   return (
     <>
       <Box
@@ -168,4 +169,4 @@ const Scheduler = () => {
   );
 };
 
-export default Scheduler;
+export default SchedulerPage;

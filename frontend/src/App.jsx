@@ -7,10 +7,10 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import LoginPage from "./pages/login-page/LoginPage";
+import LoginPage from "./pages/login/LoginPage";
 import MainLayout from "./layouts/MainLayout";
-import AIBot from "./pages/twitter/AIBot";
-import Scheduler from "./pages/twitter/Scheduler";
+import AIBot from "./pages/twitter/AIBotPage";
+import Scheduler from "./pages/twitter/SchedulerPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter(

@@ -16,16 +16,17 @@ const authSlice = createSlice({
       const { accessToken, refreshToken, socialMediaTokens, loggedUser } =
         action.payload.data;
       state.authStatus = true;
-      state.socialMediaTokens = socialMediaTokens;
       state.authUser = loggedUser;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
+      state.socialMediaTokens = socialMediaTokens;
     },
     authLogout: (state) => {
       state.authStatus = false;
       state.authUser = null;
       state.accessToken = null;
       state.refreshToken = null;
+      state.socialMediaTokens = null;
     },
   },
 });

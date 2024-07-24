@@ -110,7 +110,6 @@ const loginUser = asyncHandler(async (req, res) => {
     userId: user._id,
   }).select("socialMedia token");
 
-  console.log(socialMediaTokens);
   return res
     .status(200)
     .cookie("accessToken", accessToken, cookieOptions)

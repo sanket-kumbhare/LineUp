@@ -9,6 +9,7 @@ import TextareaField from "./TextareaField";
 import Toast from "./Toast";
 import ProtectedRoute from "./ProtectedRoute";
 import ModalTemplate from "./ModalTemplate";
+import SocialAuth from "./SocialAuth";
 
 export {
   InputField,
@@ -22,4 +23,5 @@ export {
   Toast,
   ProtectedRoute,
   ModalTemplate,
+  SocialAuth,
 };

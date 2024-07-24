@@ -61,7 +61,7 @@ const RegisterForm = () => {
           />
           <InputField
             label={"Password"}
-            type={"passowrd"}
+            type={"password"}
             placeholder={"\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"}
             {...register("password", {
               required: true,

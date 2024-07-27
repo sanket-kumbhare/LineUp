@@ -38,7 +38,7 @@ const callback = asyncHandler(async (req, res) => {
 
   // TODO: userId is hardcoded for now. Need to get it from middleware/session/cookies
   const creds = await UserSocialMediaToken.create({
-    userId: new ObjectId("669ff5a4d6b8b7caea96c99f"),
+    userId: req.user._id,
     socialMedia: "twitter",
     token: accessTokenResponse.token,
   });
@@ -51,7 +51,6 @@ const login = asyncHandler(async (req, res) => {
     state: STATE,
     code_challenge_method: "s256",
   });
-  console.log({ authUrl });
   res.redirect(authUrl);
 });
 

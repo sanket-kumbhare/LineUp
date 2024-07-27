@@ -1,7 +1,11 @@
 import { Button, Sheet, Typography, Grid } from "@mui/joy";
 import { X as XIcon } from "@mui/icons-material";
+import { twitterLogin } from "../utils/socialAuths";
 
 const SocialAuth = () => {
+  const handleTwitterLogin = () => {
+    twitterLogin();
+  };
   return (
     <Grid
       sx={{
@@ -51,13 +55,17 @@ const SocialAuth = () => {
           account tokens are securely stored and encrypted.
         </Typography>
         <div
-          sx={{
+          style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "flex-start",
+            justifyContent: "flex-end",
           }}
         >
-          <Button color="primary" endDecorator={<XIcon />}>
+          <Button
+            color="primary"
+            onClick={handleTwitterLogin}
+            endDecorator={<XIcon />}
+          >
             Connect
           </Button>
         </div>

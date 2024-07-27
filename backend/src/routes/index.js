@@ -2,12 +2,14 @@ const express = require("express");
 
 const userRouter = require("./user.routes");
 const postRouter = require("./post.routes");
-const twitterRouter = require("./twitter.routes");
+const twitterRouter = require("./social/twitter.routes");
 
-const router = express.Router();
+const apiRouter = express.Router();
+const socialMediaRouter = express.Router();
 
-router.use("/users", userRouter);
-router.use("/posts", postRouter);
-router.use("/twitter", twitterRouter);
+apiRouter.use("/users", userRouter);
+apiRouter.use("/posts", postRouter);
 
-module.exports = router;
+socialMediaRouter.use("/twitter", twitterRouter);
+
+module.exports = { apiRouter, socialMediaRouter };

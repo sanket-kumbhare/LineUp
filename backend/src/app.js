@@ -3,7 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 
-const apiRouter = require("./routes");
+const { apiRouter, socialMediaRouter } = require("./routes");
 
 const app = express();
 
@@ -19,7 +19,10 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(cookieParser());
 
-// apiRoutes
+// api routes
 app.use("/api/v1", apiRouter);
+
+// social media routes
+app.use("/auth/", socialMediaRouter);
 
 module.exports = app;

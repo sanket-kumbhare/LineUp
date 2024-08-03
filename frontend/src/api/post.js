@@ -4,12 +4,11 @@ import { useSelector } from "react-redux";
 
 class Posts {
   axios;
-  headers;
   constructor() {
     this.axios = axios.create(axiosConfig);
   }
 
-  getHeaders(accessToken) {
+  headers(accessToken) {
     return {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -22,7 +21,7 @@ class Posts {
     try {
       const response = await this.axios.get(
         "/posts/list",
-        this.getHeaders(accessToken)
+        this.headers(accessToken)
       );
       return response.data;
     } catch (error) {
@@ -30,21 +29,24 @@ class Posts {
     }
   }
 
-  async getPost(id) {
+  async getPost(id, accessToken) {
     try {
-      const response = await this.axios.get(`/posts/${id}`);
+      const response = await this.axios.get(
+        `/posts/${id}`,
+        this.headers(accessToken)
+      );
       return response.data;
     } catch (error) {
       throw error;
     }
   }
 
-  async addPost(accessToken, data) {
+  async addPost(data, accessToken) {
     try {
       const response = await this.axios.post(
         "/posts/add",
         data,
-        this.getHeaders(accessToken)
+        this.headers(accessToken)
       );
       return response.data;
     } catch (error) {
@@ -52,18 +54,25 @@ class Posts {
     }
   }
 
-  async updatePost(id, data) {
+  async updatePost(id, data, accessToken) {
     try {
-      const response = await this.axios.post(`/posts/update/${id}`, data);
+      const response = await this.axios.post(
+        `/posts/update/${id}`,
+        data,
+        this.headers(accessToken)
+      );
       return response.data;
     } catch (error) {
       throw error;
     }
   }
 
-  async deletePost(id, data) {
+  async deletePost(id, accessToken) {
     try {
-      const response = await this.axios.delete(`/posts/delete/${id}`);
+      const response = await this.axios.delete(
+        `/posts/delete/${id}`,
+        this.headers(accessToken)
+      );
       return response.data;
     } catch (error) {
       throw error;

@@ -15,11 +15,13 @@ import { useEffect, useState } from "react";
 import { TweetForm, SocialAuth } from "../../components";
 import tweets from "../../api/post";
 import { capitalize } from "lodash";
+import { useSelector } from "react-redux";
 
 const SchedulerPage = () => {
   const [open, setOpen] = useState(false);
   const [posts, setPosts] = useState([]);
   const [modalContent, setModalContent] = useState("");
+  const accessToken = useSelector((state) => state.auth.accessToken);
 
   const handleOpen = (content) => {
     setModalContent(content);
@@ -40,7 +42,7 @@ const SchedulerPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await tweets.getPosts();
+        const response = await tweets.getPosts(accessToken);
         setPosts(response.data.posts);
       } catch (error) {
         console.error(error);

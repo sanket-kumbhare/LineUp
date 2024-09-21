@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import auth from "../../api/auth";
 
 const initialState = {
   authStatus: false,
@@ -13,20 +12,20 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     authLogin: (state, action) => {
-      const { accessToken, refreshToken, socialMediaTokens, loggedUser } =
+      const { accessToken, refreshToken, loggedUser, socialAccounts } =
         action.payload.data;
       state.authStatus = true;
       state.authUser = loggedUser;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
-      state.socialMediaTokens = socialMediaTokens;
+      state.socialAccounts = socialAccounts;
     },
     authLogout: (state) => {
       state.authStatus = false;
       state.authUser = null;
       state.accessToken = null;
       state.refreshToken = null;
-      state.socialMediaTokens = null;
+      state.socialAccounts = null;
     },
   },
 });

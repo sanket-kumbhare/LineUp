@@ -106,9 +106,14 @@ const loginUser = asyncHandler(async (req, res) => {
     "-password -refreshToken"
   );
 
-  const socialMediaTokens = await UserSocialMediaToken.find({
+  const socialMedia = await UserSocialMediaToken.find({
     userId: user._id,
-  }).select("socialMedia token");
+  }).select("socialMedia -_id");
+
+  let socialAccounts = socialMedia.reduce((acc, curr) => {
+    acc[curr.socialMedia] = true;
+    return acc;
+  }, {});
 
   return res
     .status(200)
@@ -117,7 +122,7 @@ const loginUser = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         200,
-        { accessToken, refreshToken, socialMediaTokens, loggedUser },
+        { accessToken, refreshToken, loggedUser, socialAccounts },
         "user logged in successfully"
       )
     );

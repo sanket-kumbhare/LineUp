@@ -1,10 +1,12 @@
+import { useSelector } from "react-redux";
 import { Button, Sheet, Typography, Grid } from "@mui/joy";
 import { X as XIcon } from "@mui/icons-material";
 import { twitterLogin } from "../utils/socialAuths";
 
 const SocialAuth = () => {
+  const accessToken = useSelector((state) => state.auth.accessToken);
   const handleTwitterLogin = () => {
-    twitterLogin();
+    twitterLogin(accessToken);
   };
   return (
     <Grid

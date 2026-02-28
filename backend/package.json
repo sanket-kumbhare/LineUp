@@ -4,6 +4,7 @@
   "description": "LineUp Backend source code.",
   "main": "index.js",
   "scripts": {
+    "build": "cd ../frontend && npm run install && npm run build && cd ../backend && npm run install",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"

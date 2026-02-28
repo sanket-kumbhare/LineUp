@@ -20,7 +20,7 @@ class Posts {
   async getPosts(accessToken) {
     try {
       const response = await this.axios.get(
-        "/posts/list",
+        "api/v1/posts/list",
         this.headers(accessToken)
       );
       return response.data;
@@ -32,7 +32,7 @@ class Posts {
   async getPost(id, accessToken) {
     try {
       const response = await this.axios.get(
-        `/posts/${id}`,
+        `api/v1/posts/${id}`,
         this.headers(accessToken)
       );
       return response.data;
@@ -44,7 +44,7 @@ class Posts {
   async addPost(data, accessToken) {
     try {
       const response = await this.axios.post(
-        "/posts/add",
+        "api/v1/posts/add",
         data,
         this.headers(accessToken)
       );
@@ -57,7 +57,7 @@ class Posts {
   async updatePost(id, data, accessToken) {
     try {
       const response = await this.axios.post(
-        `/posts/update/${id}`,
+        `api/v1/posts/update/${id}`,
         data,
         this.headers(accessToken)
       );
@@ -70,7 +70,7 @@ class Posts {
   async deletePost(id, accessToken) {
     try {
       const response = await this.axios.delete(
-        `/posts/delete/${id}`,
+        `api/v1/posts/delete/${id}`,
         this.headers(accessToken)
       );
       return response.data;

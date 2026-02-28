@@ -10,7 +10,7 @@ class Auth {
 
   async loginAccount(data) {
     try {
-      const response = await this.axios.post("/users/login", data);
+      const response = await this.axios.post("api/v1/users/login", data);
       return response.data;
     } catch (error) {
       throw error;
@@ -19,16 +19,16 @@ class Auth {
 
   async registerAccount(data) {
     try {
-      const response = await this.axios.post("/users/register", data);
+      const response = await this.axios.post("api/v1/users/register", data);
       return response.data;
     } catch (error) {
       throw error;
     }
   }
 
-  async logoutAccount(){
+  async logoutAccount() {
     try {
-      const response = await this.axios.post("/users/logout");
+      const response = await this.axios.post("api/v1/users/logout");
       return response.data;
     } catch (error) {
       throw error;
